@@ -27,5 +27,6 @@ const countryExtension = require('joi-country-and-codes-validation-extension');
 const extendedJoi = Joi.extend(countryExtension);
 
 const schema = extendedJoi.country().toCountryCode();
-const {value} = schema.validate('Pol') // pl
+const { value } = schema.validate('Pol') // pl
+
 ```
