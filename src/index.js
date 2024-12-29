@@ -1,5 +1,3 @@
-const BJ = require('joi');
-
 const { COUNTRY_CODE_MIN_LENGTH, COUNTRY_CODE_MAX_LENGTH, ERROR_MESSAGES } = require('./constants');
 const countries = require('./artifacts/country-to-country-codes.json');
 const reverseObject = require('./utils/reverse-object');
