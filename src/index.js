@@ -8,7 +8,6 @@ const countryType = (joi) => ({
   type: 'country',
   base: joi.string().min(COUNTRY_CODE_MIN_LENGTH).prefs({ abortEarly: false }),
   messages: {
-    root: 'country',
     'country.name': `{{#label}} ${ERROR_MESSAGES.INVALID_COUNTRY_NAME}`,
     'country.code': `{{#label}} ${ERROR_MESSAGES.INVALID_COUNTRY_CODE}`,
   },

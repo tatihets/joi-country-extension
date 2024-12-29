@@ -15,10 +15,10 @@ describe('Test new joi type country', () => {
     expect(country.validate('Test').error).toBeInstanceOf(Joi.ValidationError);
     expect(country.validate('Test').error.details).toStrictEqual([
       {
-        message: `"country" ${ERROR_MESSAGES.INVALID_COUNTRY_NAME}`,
+        message: `"value" must be a valid or existing country name`,
         path: [],
         type: 'country.name',
-        context: { label: 'country', value: 'Test' }
+        context: { label: 'value', value: 'Test' }
       }
     ]);
   });
@@ -26,7 +26,7 @@ describe('Test new joi type country', () => {
   test('Should return error if invalid country value length is provided', () => {
     expect(country.validate('t').error).toBeInstanceOf(Joi.ValidationError);
     expect(country.validate('t').error.details[0]).toEqual(expect.objectContaining(({
-      message: `"country" length must be at least ${COUNTRY_CODE_MIN_LENGTH} characters long`,
+      message: `"value" length must be at least ${COUNTRY_CODE_MIN_LENGTH} characters long`,
       path: [],
       type: 'string.min',
     })));
@@ -34,7 +34,7 @@ describe('Test new joi type country', () => {
 
   test('Should return error if invalid country code value is provided', () => {
     const expectedError = {
-      message: `"country" ${ERROR_MESSAGES.INVALID_COUNTRY_CODE}`,
+      message: `"value" ${ERROR_MESSAGES.INVALID_COUNTRY_CODE}`,
       path: [],
       type: 'country.code',
     };
@@ -48,7 +48,7 @@ describe('Test new joi type country', () => {
 
   test('Should return error if not string is provided', () => {
     const expectedError = {
-      message: '"country" must be a string',
+      message: '"value" must be a string',
       path: [],
       type: 'string.base',
     };
@@ -67,12 +67,12 @@ describe('Test new joi type country', () => {
   test('Should retain string predefined options', () => {
     expect(country.lowercase().validate('PoLand')).toStrictEqual({ value: 'poland' });
     expect(country.min(COUNTRY_CODE_MAX_LENGTH).validate('p').error.details[0]).toEqual(expect.objectContaining(({
-      message: `"country" length must be at least ${COUNTRY_CODE_MAX_LENGTH} characters long`,
+      message: `"value" length must be at least ${COUNTRY_CODE_MAX_LENGTH} characters long`,
       path: [],
       type: 'string.min',
     })));
     expect(country.max(COUNTRY_CODE_MIN_LENGTH).validate('pol').error.details[0]).toEqual(expect.objectContaining(({
-      message: `"country" length must be less than or equal to ${COUNTRY_CODE_MIN_LENGTH} characters long`,
+      message: `"value" length must be less than or equal to ${COUNTRY_CODE_MIN_LENGTH} characters long`,
       path: [],
       type: 'string.max',
     })));
