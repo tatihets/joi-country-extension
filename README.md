@@ -1,5 +1,5 @@
 # joi-country-extension
-Small node.js package to validate country by full name, country alpha-2 and alpha-3 characters code. Also it allows convert country to country alpha-2 and alpha-3 characters code
+Small npm package to validate country by full name, country alpha-2 and alpha-3 characters code. Also it allows convert country to country alpha-2 and alpha-3 characters code
 
 ### How to install
 
