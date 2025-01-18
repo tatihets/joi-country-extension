@@ -3,8 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - '*'
-      - '!main'
+      - '**'
   pull_request:
     branches:
       - main
@@ -12,7 +11,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
     if: github.ref != 'refs/heads/main'
 
     steps:
@@ -54,5 +52,5 @@ jobs:
 
       - name: Publish npm package
         run: |
-          npm version patch  # Update the version (patch, minor, or major)
-          npm publish --access public  # Publish the package to npm
+          npm version patch
+          npm publish --access public
