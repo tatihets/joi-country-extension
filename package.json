@@ -1,6 +1,6 @@
 {
   "name": "joi-country-and-codes-validation-extension",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Package to use new type country for Joi and convert to country alpha-2 or alpha-3 iso codes",
   "main": "src/index.js",
   "keywords": [
