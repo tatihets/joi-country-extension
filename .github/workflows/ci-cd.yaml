@@ -1,21 +1,15 @@
 name: CI/CD Pipeline
 
-# Trigger the workflow on push to `dev` for running tests and to `master` for publishing npm package
 on:
   push:
     branches:
-      - dev      # Trigger on pushes to dev branch for tests
-      - master   # Trigger on pushes to master branch for publishing npm package
-  pull_request:
-    branches:
-      - master   # Trigger for PRs targeting master branch (if needed)
+      - '*'
 
 jobs:
-  # Job to run tests on dev branch
   test:
     runs-on: ubuntu-latest
 
-    if: github.ref == 'refs/heads/dev'  # Ensure this job only runs on push to `dev` branch
+    if: github.ref != 'refs/heads/main'
 
     steps:
       - name: Checkout code
@@ -32,11 +26,10 @@ jobs:
       - name: Run tests
         run: npm test
 
-  # Job to publish npm package on push to master branch
   publish:
     runs-on: ubuntu-latest
-    needs: test        # Ensure that the tests pass before publishing
-    if: github.ref == 'refs/heads/master'  # Only run when pushing to master
+    needs: test
+    if: github.ref == 'refs/heads/main'
 
     steps:
       - name: Checkout code
@@ -53,7 +46,7 @@ jobs:
       - name: Set up npm authentication
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}  # Ensure NPM_TOKEN is stored as a secret in GitHub
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish npm package
         run: |
