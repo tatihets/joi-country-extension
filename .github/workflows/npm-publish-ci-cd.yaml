@@ -3,15 +3,12 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - '**'
-  pull_request:
-    branches:
-      - main
+      - 'main'  # Trigger on push to any branch (main and non-main branches)
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    if: github.ref != 'refs/heads/main'
+    if: github.ref != 'refs/heads/main'  # Only run on non-main branches
 
     steps:
       - name: Checkout code
@@ -30,7 +27,6 @@ jobs:
 
   publish:
     runs-on: ubuntu-latest
-    needs: test
     if: github.ref == 'refs/heads/main'
 
     steps:
